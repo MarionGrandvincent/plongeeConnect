@@ -53,8 +53,15 @@
         text: "Le poisson-mandarin fait une parade amoureuse chorégraphiée à la tombée de la nuit, tous les soirs. Romantisme + moves de danse = combo gagnant. "
     }
   ]
-  const id = 1;
-  const shuffled = ref((funFact.sort(() => 0.5 - Math.random())).slice(0, 3));
+  const $data = ref((funFact.sort(() => 0.5 - Math.random())).slice(0, 3));
+
+  const $pos = () => {
+    let _index = 0;
+    if(_index != 0 && _index != 2) {
+        return false
+    }
+  }
+  console.log($pos)
   
 
 </script>
@@ -62,11 +69,13 @@
 
 <template>
 
-    <div class="py-50">
-        <ul class="grid grid-cols-3">
-            <li :id="`item-` + id++" class="relative py-50 mx-2" v-for="item in shuffled">
-                <h2 class="text-center">{{ item.title }}</h2>
-                <p class="text-center">{{ item.text }}</p>
+    <div>
+        <ul class="flex">
+            <li class="w-1/3 relative py-50" v-for="(_this, _index) in $data" :class="[{ 'mx-8' : _index != 0 && _index != $data.length-1}, `bgStyle-`+ _index]">
+                <div class="px-12 text-center">
+                    <h2 class="mb-3 font-semibold leading-[1.5]">{{ _this.title }}</h2>
+                    <p class="italic leading-[1.25] text-grey">{{ _this.text }}</p>
+                </div>
             </li>
         </ul>
     </div>
@@ -77,16 +86,29 @@
 
 
 <style scoped>
-  .bg-form-1:before {
-    content:"";
-    background-image: url("/bg-form-1.png");
-    min-width: 100%;
-    min-height: 100%;
-    position: absolute;
-    top: 0;
-    background-size: contain;
-    background-repeat: no-repeat;
-    background-position: center;
-    z-index: -1;
-  }
+    .bgStyle-0:before,
+    .bgStyle-1:before,
+    .bgStyle-2:before {
+        content:"";
+        min-width: 100%;
+        min-height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        margin: auto;
+        background-size: contain;
+        background-repeat: no-repeat;
+        background-position: center;
+        z-index: -1;
+    }
+    .bgStyle-0:before {
+        background-image: url("/bg-form-5.png");
+    }
+    .bgStyle-1:before {
+        background-image: url("/bg-form-3.png");
+    }
+    .bgStyle-2:before {
+        background-image: url("/bg-form-4.png");
+    }
 </style>

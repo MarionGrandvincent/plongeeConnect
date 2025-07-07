@@ -15,6 +15,9 @@ const router = createRouter({
     {
       path: '/encyclopedie-poisson', name: 'Encyclopedie-poisson',component: () => import('../views/EncyclopediePoisson.vue')
     },
+    {
+      path: '/contact', name: 'Nous-contacter',component: () => import('../views/ContactView.vue')
+    }
   ],
 })
 
